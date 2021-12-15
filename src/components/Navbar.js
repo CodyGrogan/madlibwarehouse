@@ -11,13 +11,13 @@ function Navbar(props){
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
             
 
-                    <Link className="navbar-brand" to='/'>Home</Link>
+                    <Link className="navbar-brand nav-link" to='/'> Home</Link>
                  
-                    <Link className="navbar-brand" to='/play'>Play</Link>
+                    <Link className="navbar-brand nav-link" to='/play'>Play</Link>
               
-                    <Link className="navbar-brand" to='/create'>Create</Link>   
+                    <Link className="navbar-brand nav-link" to='/create'>Create</Link>   
                     
-                    <Link className="navbar-brand" to='/home'>Profile</Link>   
+                    <Link className="navbar-brand nav-link" to='/'>Profile</Link>   
                     
                     <button type="button" className='navbar-brand btn btn-outline-primary'  id="sign-in" onclick="signIn()" >
                     <i className="material-icons">account_circle</i>Sign-in with Google

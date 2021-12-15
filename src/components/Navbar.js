@@ -5,11 +5,14 @@ function Navbar(props){
         <div>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-                    <Link to='/'>Home</Link>
-                   
-                    <Link to='/play'>Play</Link>
-
-                    <Link to='/create'>Create</Link>            </nav>
+                    <Link class="navbar-brand" to='/'>Home</Link>
+                 
+                    <Link class="navbar-brand" to='/play'>Play</Link>
+              
+                    <Link class="navbar-brand" to='/create'>Create</Link>   
+                     
+                  
+            </nav>
         </div>
     )
 }

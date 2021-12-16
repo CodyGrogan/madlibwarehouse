@@ -1,4 +1,5 @@
 import Navbar from "./Navbar";
+import Game from "./Game";
 
 // HOW THIS WILL WORK
 //Play page will display a list of PlayItem components
@@ -12,11 +13,25 @@ import Navbar from "./Navbar";
 
 
 function Play(props){
+    let storyObject = {
+        wordList: [
+            "(adjective)",
+            "(Name)",
+            "(verb)",
+            "(food)",
+            "(noun)"
+        ],
+        story: "I one had a #0 pony named #1. He loved to #2 all night long. He ate #3 every morning. He had a favorite toy #4 that he slept with every night. ",
+        title: "My Little Pony"
+    };
+
+
     return(
         <div>
             <Navbar/>
 
             <p>This is play</p>
+            <Game storyObject={storyObject} />
         </div>
     )
 }
@@ -26,10 +41,14 @@ function Play(props){
 
 {
     "wordlist": [
-        "(noun)",
+        "(adjective)",
+        "(Name)",
+        "(verb)",
+        "(food)",
         "(noun)"
     ],
-    "story": "Hello #0. I am a #1."
+    "story": "I one had a #0 pony named #1. He loved to #2 all night long. He ate #3 every morning. He had a very toy #4 that he slept with every night. ",
+    "title": "My Little Pony"
 }
 
 */

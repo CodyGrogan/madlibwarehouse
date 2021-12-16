@@ -73,8 +73,9 @@ function submitTemplate(){
     console.log(input);
 
     let madlib = {
-        wordlist: wordArray,
-        story: input
+        wordList: wordArray,
+        story: input,
+        title: title
     }
 
     console.log(madlib);

@@ -39,6 +39,7 @@ function Game(props){
             wordInputDiv.hidden = true;
             let newstory = createStory();
             document.getElementById('storyP').innerText= newstory;
+            document.getElementById('storyTitle').innerText = title;
         }
     },[currentWord]);
 
@@ -54,13 +55,22 @@ function Game(props){
 
     return(
         <div>
-            <div id='wordInputDiv'>
+            
+            <div id='storyDiv' class='card'>
+                <div class='card-header'>
+                    <p id='storyTitle'>{title}</p>
+                </div>
+                <div class='card-body'>
+
+                <div id='wordInputDiv'>
                 <p>Please enter a {wordList[currentWord]}</p><br/>
                 <input type={'text'} onKeyDown={enterKeyPressed} id='getWord'></input><br/><br/>
                 <button id='textBtn' onClick={submitWord} type="button" className="btn btn-primary">Submit</button>
-            </div>
-            <div id='storyDiv'>
-                <p id='storyP'></p>
+                </div>
+
+
+                    <p id='storyP'></p>
+                </div>
             </div>
         </div>
     )

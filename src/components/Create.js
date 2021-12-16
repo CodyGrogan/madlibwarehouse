@@ -1,9 +1,11 @@
 import Navbar from "./Navbar";
 
+
+
 function submitTemplate(){
 
     let input = document.getElementById('madlibtextarea').value;
-     
+    let title = document.getElementById('storytitle').value;
     console.log(input);
 
     let parenthesesArray1 = [];
@@ -29,6 +31,14 @@ function submitTemplate(){
 
 
     }
+
+    if (parenthesesArray1.length != parenthesesArray2.length || parenthesesArray2.length == 0 || title.length < 1){
+
+        alert('Your story needs a title must have at least one word request in ( ). ')
+
+        
+    }
+    else{
  
     for (let i = 0; i < parenthesesArray1.length; i++){
 
@@ -37,6 +47,7 @@ function submitTemplate(){
         let secondindex = parenthesesArray2[i] + 1;
         let removed = input.slice(index, secondindex);
         wordArray.push(removed);
+        
         console.log(removed)
         console.log(wordArray);
       
@@ -46,11 +57,29 @@ function submitTemplate(){
 
     }
 
+    for (let i = 0; i < wordArray.length; i++){
+
+        let hashstring = '#' + i;
+        input = input.replace(wordArray[i], hashstring);
+
+        //later when reading a madlib from the database, the words
+        //given by the player will be inserted at the index of each #
+    }
+
     // get the indecies of each ( and )
 
 
     console.log(parenthesesArray1);
     console.log(input);
+
+    let madlib = {
+        wordlist: wordArray,
+        story: input
+    }
+
+    console.log(madlib);
+
+    }
 
     
 }
@@ -67,7 +96,9 @@ function Create(props){
 
             <p>When you write your story, request words by putting them in parenthesis.</p>
             <p>ex: Harold was a (adjective) (animal). He loves to (verb).</p>
-            <textarea id='madlibtextarea' cols='50' rows="10"></textarea>
+            <input type='text' id='storytitle' placeholder={'Write Title Here'}></input> <br/>
+
+            <textarea id='madlibtextarea' cols='50' rows="10" placeholder="Write story here"></textarea>
             <br/>
             <button type="button" onClick={submitTemplate} className="btn btn-primary">Submit</button>
         </div>

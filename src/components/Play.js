@@ -1,5 +1,7 @@
 import Navbar from "./Navbar";
 import Game from "./Game";
+import PlayItem from "./PlayItem";
+import { useState } from "react";
 
 // HOW THIS WILL WORK
 //Play page will display a list of PlayItem components
@@ -12,7 +14,10 @@ import Game from "./Game";
 //then it will display it to the user.
 
 
+
+// currently the included storyObjects are for testing and will later be drawn from a database
 function Play(props){
+   
     let storyObject = {
         wordList: [
             "(adjective)",
@@ -36,13 +41,40 @@ function Play(props){
         title: "Hello Rosa"
       }
 
+      
+
+    const [pickedStory, setPickedStory] = useState(storyObject2);
+
+
+      let pickStory = () =>{
+
+    }
+
+
+
+
 
     return(
         <div>
             <Navbar/>
 
             <p>This is play</p>
-            <Game storyObject={storyObject2} />
+
+            <div id='tableDiv'>
+            <table className="table">
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Plays</th>
+                    <th></th>
+                </tr>
+           <PlayItem storyObject={storyObject} setStory={setPickedStory}/>
+           
+           <PlayItem storyObject={storyObject2} setStory={setPickedStory}/>
+            </table>
+            </div>
+
+            <Game storyObject={pickedStory} />
         </div>
     )
 }

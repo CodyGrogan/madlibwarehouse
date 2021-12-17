@@ -1,7 +1,8 @@
 import Navbar from "./Navbar";
 import Game from "./Game";
 import PlayItem from "./PlayItem";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 
 // HOW THIS WILL WORK
 //Play page will display a list of PlayItem components
@@ -17,6 +18,9 @@ import { useState } from "react";
 
 // currently the included storyObjects are for testing and will later be drawn from a database
 function Play(props){
+    const [keyValue, setKeyValue] = useState(0);  //this is necessary to make the Game component reset when the reset button is clicked.
+
+    var storypicked = false;
    
     let storyObject = {
         wordList: [
@@ -41,16 +45,55 @@ function Play(props){
         title: "Hello Rosa"
       }
 
+      let storyObjectNull=
+      {
+          wordList: [
+           'null'
+          ],
+          story: "null",
+          title: "null"
+        }
+  
+        
+
       
+    let frame = document.getElementById('gameFrame');
+    let tablediv = document.getElementById('tableDiv');
 
-    const [pickedStory, setPickedStory] = useState(storyObject2);
+    const [pickedStory, setPickedStory] = useState(storyObjectNull);
 
 
-      let pickStory = () =>{
+      let pickStory = (story) =>{
+
+        console.log('pick story clicked')
+
+        console.log(story);
+        storypicked = true;
+        setPickedStory(story)
 
     }
 
+    let resetGame = () =>{
+        setPickedStory(storyObjectNull);
+        let newkeyvalue = keyValue + 1;
+        setKeyValue(newkeyvalue);  //this causes the Game component to be remade
+        tablediv.hidden = false;
+        frame.hidden = true;
+        
+    }
 
+    useEffect(()=>{
+
+
+        if(pickedStory.title != 'null' && pickedStory.story != 'null' ){
+        console.log(storypicked + "bool")
+        
+        tablediv.hidden = true;
+        frame.hidden = false;
+        }
+        
+        
+    },[pickedStory]);
 
 
 
@@ -58,7 +101,7 @@ function Play(props){
         <div>
             <Navbar/>
 
-            <p>This is play</p>
+            <p>Pick a story and play!</p>
 
             <div id='tableDiv'>
             <table className="table">
@@ -68,13 +111,14 @@ function Play(props){
                     <th>Plays</th>
                     <th></th>
                 </tr>
-           <PlayItem storyObject={storyObject} setStory={setPickedStory}/>
+           <PlayItem storyObject={storyObject} setStory={pickStory}/>
            
-           <PlayItem storyObject={storyObject2} setStory={setPickedStory}/>
+           <PlayItem storyObject={storyObject2} setStory={pickStory}/>
             </table>
             </div>
-
-            <Game storyObject={pickedStory} />
+        <div hidden id='gameFrame'>
+            <Game key={keyValue} storyObject={pickedStory} resetGame={resetGame}/>
+        </div>
         </div>
     )
 }

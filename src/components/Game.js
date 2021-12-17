@@ -58,7 +58,7 @@ function Game(props){
             
             <div id='storyDiv' class='card'>
                 <div class='card-header'>
-                    <p id='storyTitle'>{title}</p>
+                    <h2 id='storyTitle'>{title}</h2>
                 </div>
                 <div class='card-body'>
 
@@ -70,6 +70,7 @@ function Game(props){
 
 
                     <p id='storyP'></p>
+                    <button onClick={props.resetGame} type='button' className='btn btn-warning btn-sm'>Reset</button>
                 </div>
             </div>
         </div>

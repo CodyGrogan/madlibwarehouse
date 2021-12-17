@@ -1,6 +1,75 @@
 import { Link } from "react-router-dom";
+import {
+    getAuth,
+    onAuthStateChanged,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+  } from 'firebase/auth';
+
+  
+
+
 
 function Navbar(props){
+
+    
+  async function signIn() {
+    console.log("sign in button pressed")
+  
+    var provider = new GoogleAuthProvider();
+    provider.setCustomParameters({
+        prompt: 'select_account'
+      });
+    await signInWithPopup(getAuth(), provider);
+  
+  }
+
+  function signOutUser() {
+ 
+    signOut(getAuth());
+  
+  }
+
+  function getUserName() {
+    return getAuth().currentUser.displayName;
+  
+  }
+  
+  function isUserSignedIn() {
+    return !!getAuth().currentUser;
+  
+  }
+  
+  
+
+function navauthStateObserver(user) {
+    if (user) {
+      console.log("user is signed in")
+      var userName = getUserName();
+      signInButtonElement.hidden = true;
+      signOutButtonElement.hidden = false;
+      let profileLink = document.getElementById('profileLink');
+      profileLink.innerText =  `${userName}'s Profile`
+      
+  
+    }
+
+    else{
+        
+      signInButtonElement.hidden = false;
+      signOutButtonElement.hidden = true;
+      
+      let profileLink = document.getElementById('profileLink');
+      profileLink.innerText =  `Profile`
+    }
+  }  
+  
+onAuthStateChanged(getAuth(), navauthStateObserver);
+  var signInButtonElement = document.getElementById('sign-in');
+  var signOutButtonElement = document.getElementById('sign-out');
+  signOutButtonElement.addEventListener('click', signOutUser);
+
     return(
         <div>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -17,11 +86,12 @@ function Navbar(props){
               
                     <Link className="navbar-brand nav-link" to='/create'>Create</Link>   
                     
-                    <Link className="navbar-brand nav-link" to='/'>Profile</Link>   
+                    <Link className="navbar-brand nav-link" to='/profile' id='profileLink'>Profile</Link>   
                     
-                    <button type="button" className='navbar-brand btn btn-outline-primary'  id="sign-in" onclick="signIn()" >
+                    <button type="button" onClick={signIn} className='navbar-brand btn btn-outline-primary'  id="sign-in" onclick="signIn()" >
                     <i className="material-icons">account_circle</i>Sign-in with Google
                   </button>
+                  <button hidden type="button" onclick={signOut} className="navbar-brand btn btn-warning" id='sign-out'>Sign Out</button>
                   
             </div>
             </nav>

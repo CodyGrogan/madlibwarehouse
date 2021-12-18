@@ -11,8 +11,8 @@ function PlayItem(props){
         
             <tr>
                 <td>{props.storyObject.title}</td>
-                <td>Two</td>
-                <td>Three</td>
+                <td>{props.storyObject.name}</td>
+                <td>{props.storyObject.plays}</td>
                 <td><button onClick={ () =>pickStory()} className="btn btn-primary btn-small">Play</button></td>
             </tr>
         

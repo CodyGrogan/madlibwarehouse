@@ -89,7 +89,8 @@ function submitTemplate(){
             story: input,
             title: title,
             uid: getAuth().currentUser.uid,
-            name: getAuth().currentUser.displayName
+            name: getAuth().currentUser.displayName,
+            plays: 0
 
         }
 

@@ -1,9 +1,21 @@
 import Navbar from "./Navbar";
+import {
+    getAuth,
+    onAuthStateChanged,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+  } from 'firebase/auth';
 
-
+  function isUserSignedIn() {
+    return !!getAuth().currentUser;
+  
+  }
 
 function submitTemplate(){
 
+
+    if (isUserSignedIn() == true){
     let input = document.getElementById('madlibtextarea').value;
     let title = document.getElementById('storytitle').value;
     console.log(input);
@@ -69,19 +81,23 @@ function submitTemplate(){
     // get the indecies of each ( and )
 
 
-    console.log(parenthesesArray1);
-    console.log(input);
+        console.log(parenthesesArray1);
+        console.log(input);
 
-    let madlib = {
-        wordList: wordArray,
-        story: input,
-        title: title
+        let madlib = {
+            wordList: wordArray,
+            story: input,
+            title: title
+        }
+
+        console.log(madlib);
+
+     }
+
     }
-
-    console.log(madlib);
-
+    else{
+        alert("please sign in");
     }
-
     
 }
 

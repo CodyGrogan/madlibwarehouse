@@ -45,6 +45,10 @@ function Navbar(props){
 
 function navauthStateObserver(user) {
     if (user) {
+      
+var signInButtonElement = document.getElementById('sign-in');
+var signOutButtonElement = document.getElementById('sign-out');
+  signOutButtonElement.addEventListener('click', signOutUser);
       console.log("user is signed in")
       var userName = getUserName();
       signInButtonElement.hidden = true;
@@ -57,6 +61,9 @@ function navauthStateObserver(user) {
 
     else{
         
+var signInButtonElement = document.getElementById('sign-in');
+var signOutButtonElement = document.getElementById('sign-out');
+  signOutButtonElement.addEventListener('click', signOutUser);
       signInButtonElement.hidden = false;
       signOutButtonElement.hidden = true;
       
@@ -66,9 +73,7 @@ function navauthStateObserver(user) {
   }  
   
 onAuthStateChanged(getAuth(), navauthStateObserver);
-  var signInButtonElement = document.getElementById('sign-in');
-  var signOutButtonElement = document.getElementById('sign-out');
-  signOutButtonElement.addEventListener('click', signOutUser);
+
 
     return(
         <div>

@@ -95,6 +95,7 @@ function submitTemplate(){
         }
 
         console.log(madlib);
+        submitData(madlib);
 
      }
 
@@ -104,6 +105,29 @@ function submitTemplate(){
     }
     
 }
+
+
+function submitData(data){
+    let jsonstring = JSON.stringify(data);
+    let postpath = '/createpost'           
+ 
+        
+    fetch(postpath, {
+        method: 'POST', 
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: jsonstring,
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
 
 
 function Create(props){

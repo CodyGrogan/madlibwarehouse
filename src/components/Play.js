@@ -19,6 +19,33 @@ import { useState, useEffect } from "react";
 // currently the included storyObjects are for testing and will later be drawn from a database
 function Play(props){
     const [keyValue, setKeyValue] = useState(0);  //this is necessary to make the Game component reset when the reset button is clicked.
+    const [storyArray, setStoryArray] = useState([]);
+    let initialLoad = false;
+    
+
+    function getStories(){
+        console.log('get stories fired')
+
+        if (initialLoad == false){
+        initialLoad = true;
+        console.log('getstories about to fetch')
+        let pathstring = '/storylist'
+        fetch(pathstring).then(response => response.json()).then(function (data){
+            console.log(data);
+            let length = data.length;
+            let newArray = [];
+            for (let i = 0; i<length;i++){
+
+                let newjsx = <PlayItem storyObject = {data[i]} setStory={pickStory}/>
+                newArray.push(newjsx);
+                
+            }
+            setStoryArray(newArray);
+
+            
+        })
+    }
+    }
 
     var storypicked = false;
    
@@ -101,7 +128,12 @@ function Play(props){
         
     },[pickedStory]);
 
+    useEffect(() => {
+        console.log('component mounted')
+        getStories();
+      }, []);
 
+    
 
     return(
         <div>
@@ -120,6 +152,8 @@ function Play(props){
            <PlayItem storyObject={storyObject} setStory={pickStory}/>
            
            <PlayItem storyObject={storyObject2} setStory={pickStory}/>
+
+           {storyArray}
             </table>
             </div>
         <div hidden id='gameFrame'>

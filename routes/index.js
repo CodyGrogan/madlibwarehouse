@@ -35,17 +35,20 @@ router.post('/createpost', function(req, res, next){
 
 router.get('/storylist', function(req, res, next){
 
-    
+    console.log('story list request')
     
     var Schema = mongoose.Schema;
     var madlibSchema = new Schema({'title': String, 'story': String, 'wordList': {type: Array}, 'name': String, 'uid': String, 'plays': Number});
         var madlibModel = mongoose.model('madlib', madlibSchema);
 
+        console.log('preparing to query')
+
         let query = madlibModel.find({}, function (err, found){
-            if (err){console.log(err);}
+            if (err){console.log(err);
+            res.send(err)}
             else{
                 console.log(found);
-                res.send(found);
+                res.json(found);
             }
         });
 

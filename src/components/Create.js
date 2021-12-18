@@ -87,7 +87,10 @@ function submitTemplate(){
         let madlib = {
             wordList: wordArray,
             story: input,
-            title: title
+            title: title,
+            uid: getAuth().currentUser.uid,
+            name: getAuth().currentUser.displayName
+
         }
 
         console.log(madlib);

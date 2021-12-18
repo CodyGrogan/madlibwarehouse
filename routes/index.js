@@ -14,30 +14,48 @@ var db = mongoose.connection;
 db.on('err', console.error.bind(console, 'mongodb connection error'));
 
 
-/*
-  router.get('/', function(req, res, next) {
-    res.redirect('/index.html');
-  });
-*/
+
+  
 router.post('/createpost', function(req, res, next){
     console.log('posting new story obj');
     let storyObj = req.body;
     console.log(storyObj);
     console.log(storyObj.wordList);
-    let array = ['helloworld', 'hello2'];
-    console.log(typeof array);
-    let stringArray = JSON.stringify(storyObj.wordList);
-    console.log(stringArray)
+   
     var Schema = mongoose.Schema;
         var madlibSchema = new Schema({'title': String, 'story': String, 'wordList': {type: Array, default: storyObj.wordList}, 'name': String, 'uid': String, 'plays': Number});
         var madlibModel = mongoose.model('madlib', madlibSchema);
-        module.exports = madlibModel;
+       
 
     let madlib_instance = new madlibModel({title: req.body.title, story: req.body.story, worldList: {String: storyObj.wordList}, name: req.body.name, uid: req.body.uid, plays: req.body.plays})
     madlib_instance.save(function(err){if (err) console.log(err);})
     
     
+});
+
+router.get('/storylist', function(req, res, next){
+
+    
+    
+    var Schema = mongoose.Schema;
+    var madlibSchema = new Schema({'title': String, 'story': String, 'wordList': {type: Array}, 'name': String, 'uid': String, 'plays': Number});
+        var madlibModel = mongoose.model('madlib', madlibSchema);
+
+        let query = madlibModel.find({}, function (err, found){
+            if (err){console.log(err);}
+            else{
+                console.log(found);
+                res.send(found);
+            }
+        });
+
 })
+
+//this must be last
+router.get('*', function(req, res, next) {
+    res.redirect('/');
+  });
+
 
   
 module.exports = router;

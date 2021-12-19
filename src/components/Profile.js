@@ -7,12 +7,32 @@ import {
   signOut,
 } from 'firebase/auth';
 import {useState, useEffect} from 'react';
+import ProfileItem from "./ProfileItem";
 
 
 function Profile(props){
 
 
-        const [userName, setUserName] = useState("User Name");
+        const [userName, setUserName] = useState("Please Sign In");
+
+
+        //temp obj for testing
+        let storyObject = {
+            wordList: [
+                "(adjective)",
+                "(Name)",
+                "(verb)",
+                "(food)",
+                "(noun)"
+            ],
+            story: "I once had a #0 pony named #1. He loved to #2 all night long. He ate #3 every morning. He had a favorite toy #4 that he slept with every night. ",
+            title: "My Little Pony",
+            name: 'Tester',
+            uid: 'testid',
+            plays: 0
+        };
+
+
         function getUserName() {
             return getAuth().currentUser.displayName;
         
@@ -29,6 +49,15 @@ function Profile(props){
                 setUserName(name);
                 
             }
+
+            else
+            {
+                setUserName("Please Sign In")
+            }
+        }
+
+        function deleteStory(){
+            console.log('delete button pressed')
         }
         onAuthStateChanged(getAuth(), authObserver);
 
@@ -54,8 +83,11 @@ function Profile(props){
                                 <th>Title</th>
                                 <th>Plays</th>
                                 <th>Delete</th>
-                                <th></th>
+                                
                             </tr>
+                          
+                                <ProfileItem storyObject={storyObject} deleteStory={deleteStory}/>
+                            
 
                     </table>
                 </div>        

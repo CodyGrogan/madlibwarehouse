@@ -101,6 +101,15 @@ router.get('/profile/getstory/:uid', function(req,res,next){
         }
     });
 
+});
+router.delete('/profile/delete/:id', function(req, res, next){
+    console.log('delete request received');
+    let id = req.params.id;
+
+    defmadlibModel.deleteOne({_id: id}).then(function (){ console.log("data deleted")});
+    res.json({message: 'success'});
+    
+  
 })
 
 //this must be last

@@ -5,10 +5,13 @@ function Game(props){
     let title = storyObject.title;
     let wordList = storyObject.wordList;
     let story = storyObject.story;
+    let storyLength = wordList.length;
     const [submittedWords, setSubmittedWords] = useState([]);
 
     const [currentWord, setCurrentWord] = useState(0); 
-
+    const [progress, setProgress] = useState(0);
+    const [progressWidth, setProgressWidth] = useState('width:0')
+    
     let submitWord = () => {
         let input = document.getElementById('getWord');
         let newWord = input.value;
@@ -19,6 +22,14 @@ function Game(props){
         input.value = '';
         console.log(submittedWords);
         setCurrentWord(currentWord + 1);
+        let sublength = submittedWords.length;
+        let wordlength = wordList.length;
+        let progressValue = (sublength/wordlength)*100;
+        console.log('progess =' + progressValue);
+        let progressString = `${progressValue}%`;
+        setProgress(progressValue);
+        setProgressWidth(progressString);
+        
     }
 
     let createStory = () =>{
@@ -65,7 +76,11 @@ function Game(props){
                 <div id='wordInputDiv'>
                 <p>Please enter a {wordList[currentWord]}</p><br/>
                 <input type={'text'} onKeyDown={enterKeyPressed} id='getWord'></input><br/><br/>
-                <button id='textBtn' onClick={submitWord} type="button" className="btn btn-primary">Submit</button>
+                <button id='textBtn' onClick={submitWord} type="button" className="btn btn-primary">Submit</button><br/>
+                <div class="progress">
+                      <div class="progress-bar" role="progressbar" style={{width: progressWidth}} aria-valuenow={progress} aria-valuemin="0" aria-valuemax="100"> {submittedWords.length} / {storyLength}</div>
+                </div>
+              
                 </div>
 
 

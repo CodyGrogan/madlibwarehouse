@@ -12,38 +12,43 @@ mongoose.connect(mongodb, {useNewUrlParser: true, useUnifiedTopology: true});
 
 var db = mongoose.connection;
 db.on('err', console.error.bind(console, 'mongodb connection error'));
+let Schema = mongoose.Schema;
 
 
-
+    
+let defmadlibSchema = new Schema({'title': String, 'story': String, 'wordList': {type: Array}, 'name': String, 'uid': String, 'plays': Number});
+let defmadlibModel = mongoose.model('madlib', defmadlibSchema);
   
-router.post('/createpost', function(req, res, next){
+
+
+
+router.post('/create/post', function(req, res, next){
     console.log('posting new story obj');
     let storyObj = req.body;
     console.log(storyObj);
     console.log(storyObj.wordList);
    
-    var Schema = mongoose.Schema;
-        var madlibSchema = new Schema({'title': String, 'story': String, 'wordList': {type: Array, default: storyObj.wordList}, 'name': String, 'uid': String, 'plays': Number});
-        var madlibModel = mongoose.model('madlib', madlibSchema);
-       
+    console.log(storyObj.wordList[0]);
 
-    let madlib_instance = new madlibModel({title: req.body.title, story: req.body.story, worldList: {String: storyObj.wordList}, name: req.body.name, uid: req.body.uid, plays: req.body.plays})
+    let madlib_instance = new defmadlibModel({title: req.body.title, story: req.body.story, wordList: storyObj.wordList, name: req.body.name, uid: req.body.uid, plays: req.body.plays})
+    
     madlib_instance.save(function(err){if (err) console.log(err);})
     
+   
     
 });
 
-router.get('/storylist', function(req, res, next){
+
+
+router.get('/play/storylist', function(req, res, next){
 
     console.log('story list request')
-    
-    var Schema = mongoose.Schema;
-    var madlibSchema = new Schema({'title': String, 'story': String, 'wordList': {type: Array}, 'name': String, 'uid': String, 'plays': Number});
-        var madlibModel = mongoose.model('madlib', madlibSchema);
+  
+   
 
         console.log('preparing to query')
 
-        let query = madlibModel.find({}, function (err, found){
+        let query = defmadlibModel.find({}, function (err, found){
             if (err){console.log(err);
             res.send(err)}
             else{
@@ -60,5 +65,4 @@ router.get('*', function(req, res, next) {
   });
 
 
-  
 module.exports = router;

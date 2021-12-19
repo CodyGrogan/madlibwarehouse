@@ -29,7 +29,7 @@ function Play(props){
         if (initialLoad == false){
         initialLoad = true;
         console.log('getstories about to fetch')
-        let pathstring = '/storylist'
+        let pathstring = '/play/storylist'
         fetch(pathstring).then(response => response.json()).then(function (data){
             console.log(data);
             let length = data.length;

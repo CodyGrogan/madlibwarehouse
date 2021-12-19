@@ -109,7 +109,7 @@ function submitTemplate(){
 
 function submitData(data){
     let jsonstring = JSON.stringify(data);
-    let postpath = '/createpost'           
+    let postpath = '/create/post'           
  
         
     fetch(postpath, {

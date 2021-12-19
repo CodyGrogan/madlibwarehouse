@@ -15,7 +15,10 @@ function Profile(props){
 
         const [userName, setUserName] = useState("Please Sign In");
         const [userStories, setUserStories] = useState([]);
-        let initialLoad = false;
+        const [totalMadlibs, setTotalMadlibs] = useState(0);
+        const [totalPlays, setTotalPlays] = useState(0);
+        const [listLoaded, setListLoaded] = useState(false);
+        var initialLoad = false;
         //temp obj for testing
         let storyObject = {
             wordList: [
@@ -48,9 +51,8 @@ function Profile(props){
                 console.log('authstate changed')
                 let name = getAuth().currentUser.displayName;
                 setUserName(name);
-                getUserStories();
 
-
+              
                 }
              
 
@@ -58,6 +60,7 @@ function Profile(props){
             {
               
                 setUserName("Please Sign In")
+                setListLoaded(false);
             }
         }
 
@@ -78,12 +81,15 @@ function Profile(props){
                 console.log(data);
                 let length = data.length;
                 let newArray = [];
+                let totalplays = 0;
                 for (let i = 0; i<length;i++){
     
                     let newjsx = <ProfileItem storyObject = {data[i]} deleteStory={deleteStory}/>
                     newArray.push(newjsx);
-                    
+                    totalplays = totalplays + storyObject.plays;
                 }
+                setTotalMadlibs(length);
+                setTotalPlays(totalplays);
                 setUserStories(newArray);
     
                 
@@ -106,6 +112,20 @@ function Profile(props){
         }
         
         }}, []);
+
+    useEffect(() => {
+        if (userName != 'Please Sign In'){
+            if (listLoaded == false){
+            setListLoaded(true);
+            getUserStories();
+            
+            }
+        }
+        else
+        {
+            setUserStories([]);
+        }
+    }, [userName, listLoaded]);
     
     onAuthStateChanged(getAuth(), authObserver);
 
@@ -118,8 +138,8 @@ function Profile(props){
                     
                     <h2 className='card-header' id='userNameTitle'>{userName}</h2>
                             <div class="card-body">
-                                <p>Total Madlibs Created: </p>
-                                <p>Your Madlib's total plays: </p>
+                                <p>Total Madlibs Created: {totalMadlibs}</p>
+                                <p>Your Madlib's total plays: {totalPlays}</p>
                             </div>
 
 

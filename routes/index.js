@@ -57,6 +57,30 @@ router.get('/play/storylist', function(req, res, next){
             }
         });
 
+});
+
+router.put('/play/updateplays', function(req, res, next){
+    console.log('Updating a storyObj plays value');
+    let storyObj = req.body;
+    console.log(storyObj);
+    let newplays = storyObj.plays + 1;
+    let searchid = `ObjectId("${storyObj._id}")`;
+    console.log(searchid);
+    console.log(storyObj.plays)
+    console.log('plays' + newplays);
+    
+    defmadlibModel.findOne({_id : storyObj._id}, function (err, doc){
+        if (err){console.log(err);
+        res.send(err)}
+        else{
+            console.log(doc);
+            doc.plays = newplays;
+            doc.save();
+            
+        }
+    });
+
+
 })
 
 //this must be last

@@ -2,6 +2,7 @@ import Navbar from "./Navbar";
 import Game from "./Game";
 import PlayItem from "./PlayItem";
 import { useState, useEffect } from "react";
+import { Mongoose } from "mongoose";
 
 
 // HOW THIS WILL WORK
@@ -57,7 +58,7 @@ function Play(props){
             "(food)",
             "(noun)"
         ],
-        story: "I one had a #0 pony named #1. He loved to #2 all night long. He ate #3 every morning. He had a favorite toy #4 that he slept with every night. ",
+        story: "I once had a #0 pony named #1. He loved to #2 all night long. He ate #3 every morning. He had a favorite toy #4 that he slept with every night. ",
         title: "My Little Pony",
         name: 'Tester',
         uid: 'testid',
@@ -103,7 +104,28 @@ function Play(props){
         console.log(story);
         storypicked = true;
         setPickedStory(story)
+        
 
+    }
+
+    let updatePlays = (story)=>{
+        let pathstring = '/play/updateplays';
+
+
+                    fetch(pathstring, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(story),
+            })
+            .then(response => response.json())
+            .then(data => {
+            console.log('Success:', data);
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            });
     }
 
     let resetGame = () =>{
@@ -120,7 +142,7 @@ function Play(props){
 
         if(pickedStory.title != 'null' && pickedStory.story != 'null' ){
         console.log(storypicked + "bool")
-        
+        updatePlays(pickedStory);
         tablediv.hidden = true;
         frame.hidden = false;
         }
@@ -149,10 +171,7 @@ function Play(props){
                     <th>Plays</th>
                     <th></th>
                 </tr>
-           <PlayItem storyObject={storyObject} setStory={pickStory}/>
-           
-           <PlayItem storyObject={storyObject2} setStory={pickStory}/>
-
+        
            {storyArray}
             </table>
             </div>
@@ -188,6 +207,10 @@ function Play(props){
   story: "Rosa is a very #0 girl. She is my #1. I #2 her very much.",
   title: "Hello Rosa"
 }
+
+   <PlayItem storyObject={storyObject} setStory={pickStory}/>
+           
+           <PlayItem storyObject={storyObject2} setStory={pickStory}/>
 
 */
 

@@ -75,7 +75,7 @@ function Game(props){
 
                 <div id='wordInputDiv'>
                 <p>Please enter a {wordList[currentWord]}</p><br/>
-                <input type={'text'} onKeyDown={enterKeyPressed} id='getWord'></input><br/><br/>
+                <input type={'text'} onKeyDown={enterKeyPressed} id='getWord' autofocus></input><br/><br/>
                 <button id='textBtn' onClick={submitWord} type="button" className="btn btn-primary">Submit</button><br/>
                 <div class="progress">
                       <div class="progress-bar" role="progressbar" style={{width: progressWidth}} aria-valuenow={progress} aria-valuemin="0" aria-valuemax="100"> {submittedWords.length} / {storyLength}</div>

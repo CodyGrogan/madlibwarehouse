@@ -14,8 +14,8 @@ function Profile(props){
 
 
         const [userName, setUserName] = useState("Please Sign In");
-
-
+        const [userStories, setUserStories] = useState([]);
+        let initialLoad = false;
         //temp obj for testing
         let storyObject = {
             wordList: [
@@ -45,21 +45,69 @@ function Profile(props){
         
         function authObserver(user){
             if (user){
+                console.log('authstate changed')
                 let name = getAuth().currentUser.displayName;
                 setUserName(name);
-                
-            }
+                getUserStories();
+
+
+                }
+             
 
             else
             {
+              
                 setUserName("Please Sign In")
             }
         }
 
-        function deleteStory(){
-            console.log('delete button pressed')
+
+
+    function getUserStories(){
+        
+        if (initialLoad == false){
+            initialLoad = true;
+            let uid = getAuth().currentUser.uid;
+            
+            let pathstring = '/profile/getstory/' + uid;   
+        
+            console.log('getstories about to fetch')
+            console.log("pathstring is "+pathstring)
+            
+            fetch(pathstring).then(response => response.json()).then(function (data){
+                console.log(data);
+                let length = data.length;
+                let newArray = [];
+                for (let i = 0; i<length;i++){
+    
+                    let newjsx = <ProfileItem storyObject = {data[i]} deleteStory={deleteStory}/>
+                    newArray.push(newjsx);
+                    
+                }
+                setUserStories(newArray);
+    
+                
+            })
         }
-        onAuthStateChanged(getAuth(), authObserver);
+    }
+
+    function deleteStory(){
+        console.log('delete button pressed')
+    }
+        
+
+    useEffect(() => {
+        console.log('component mounted');
+        
+        console.log('initial load' + initialLoad)
+        if (initialLoad == false){
+        if (isUserSignedIn()==true){
+        getUserStories();
+        }
+        
+        }}, []);
+    
+    onAuthStateChanged(getAuth(), authObserver);
 
     return(
         <div>
@@ -74,7 +122,6 @@ function Profile(props){
                                 <p>Your Madlib's total plays: </p>
                             </div>
 
-                    Profile Page Under Construction
 
                     </div>
 
@@ -85,9 +132,7 @@ function Profile(props){
                                 <th>Delete</th>
                                 
                             </tr>
-                          
-                                <ProfileItem storyObject={storyObject} deleteStory={deleteStory}/>
-                            
+                            {userStories}
 
                     </table>
                 </div>        
@@ -96,5 +141,9 @@ function Profile(props){
         </div>
     )
 }
+
+
+//<ProfileItem storyObject={storyObject} deleteStory={deleteStory}/>
+                            
 
 export default Profile;

@@ -81,6 +81,26 @@ router.put('/play/updateplays', function(req, res, next){
     });
 
 
+});
+
+router.get('/profile/getstory/:uid', function(req,res,next){
+
+    console.log('profile story list request')
+  
+    let useruid = req.params.uid;
+    console.log('uid is ' + useruid);
+
+    console.log('preparing to query')
+
+    let query = defmadlibModel.find({uid: useruid}, function (err, found){
+        if (err){console.log(err);
+        res.send(err)}
+        else{
+            console.log(found);
+            res.json(found);
+        }
+    });
+
 })
 
 //this must be last

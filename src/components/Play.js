@@ -24,8 +24,8 @@ function Play(props){
     let initialLoad = false;
     
 
-    function getStories(){
-        console.log('get stories fired')
+function getStories(){
+    console.log('get stories fired')
 
         if (initialLoad == false){
         initialLoad = true;

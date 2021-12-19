@@ -97,8 +97,28 @@ function Profile(props){
         }
     }
 
-    function deleteStory(){
+    function deleteStory(storyObject){
         console.log('delete button pressed')
+        let id = storyObject._id;
+        let postpath = '/profile/delete/' + id;
+        fetch(postpath, {
+            method: 'DELETE', 
+            headers: {
+            'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+
+            //this only sometimes works immediately, fix this
+            setListLoaded(false);
+            
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    
     }
         
 

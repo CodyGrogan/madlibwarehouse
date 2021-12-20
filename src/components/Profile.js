@@ -61,6 +61,8 @@ function Profile(props){
               
                 setUserName("Please Sign In")
                 setListLoaded(false);
+                setTotalPlays(0);
+                setTotalMadlibs(0);
             }
         }
 
@@ -86,7 +88,7 @@ function Profile(props){
     
                     let newjsx = <ProfileItem storyObject = {data[i]} deleteStory={deleteStory}/>
                     newArray.push(newjsx);
-                    totalplays = totalplays + storyObject.plays;
+                    totalplays = totalplays + data[i].plays;
                 }
                 setTotalMadlibs(length);
                 setTotalPlays(totalplays);
@@ -112,6 +114,7 @@ function Profile(props){
             console.log('Success:', data);
 
             //this only sometimes works immediately, fix this
+            setUserStories([]);
             setListLoaded(false);
             
         })

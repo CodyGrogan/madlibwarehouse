@@ -142,9 +142,7 @@ function Create(props){
     return(
         <div>
             <Navbar/>
-            <p>This is Create</p>
-
-
+            
             <p>In this section, write your own mad lib template</p>
 
             <p>When you write your story, request words by putting them in parenthesis.</p>

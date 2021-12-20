@@ -5,20 +5,14 @@ var mongoose = require('mongoose');
 //var mongopassword = require('./secrets.js')
 var mongopassword = process.env.MONGOPASS;
 //need madlib model
-//var madlibModel = require('../models/madlibModel');
+var defmadlibModel = require('../models/madlibModel');
 
 var mongodb = 'mongodb+srv://cg123:'+ mongopassword +'@sandbox.o8c7z.mongodb.net/Madlib?retryWrites=true&w=majority';
 mongoose.connect(mongodb, {useNewUrlParser: true, useUnifiedTopology: true});
 
 var db = mongoose.connection;
 db.on('err', console.error.bind(console, 'mongodb connection error'));
-let Schema = mongoose.Schema;
 
-
-    
-let defmadlibSchema = new Schema({'title': String, 'story': String, 'wordList': {type: Array}, 'name': String, 'uid': String, 'plays': Number});
-let defmadlibModel = mongoose.model('madlib', defmadlibSchema);
-  
 
 
 

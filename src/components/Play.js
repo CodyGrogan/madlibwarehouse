@@ -50,34 +50,7 @@ function getStories(){
 
     var storypicked = false;
    
-    let storyObject = {
-        wordList: [
-            "(adjective)",
-            "(Name)",
-            "(verb)",
-            "(food)",
-            "(noun)"
-        ],
-        story: "I once had a #0 pony named #1. He loved to #2 all night long. He ate #3 every morning. He had a favorite toy #4 that he slept with every night. ",
-        title: "My Little Pony",
-        name: 'Tester',
-        uid: 'testid',
-        plays: 0
-    };
 
-    let storyObject2=
-    {
-        wordList: [
-          "(adjective)",
-          "(noun)",
-          "(verb)"
-        ],
-        story: "Rosa is a very #0 girl. She is my #1. I #2 her very much.",
-        title: "Hello Rosa",
-        name: 'Tester',
-        uid: 'testid',
-        plays: 0
-      }
 
       let storyObjectNull=
       {
@@ -183,35 +156,6 @@ function getStories(){
 }
 
 
-/* example story obj
 
-{
-    "wordlist": [
-        "(adjective)",
-        "(Name)",
-        "(verb)",
-        "(food)",
-        "(noun)"
-    ],
-    "story": "I one had a #0 pony named #1. He loved to #2 all night long. He ate #3 every morning. He had a very toy #4 that he slept with every night. ",
-    "title": "My Little Pony"
-}
-
-
-{
-  wordList: [
-    "(adjective)",
-    "(noun)",
-    "(verb)"
-  ],
-  story: "Rosa is a very #0 girl. She is my #1. I #2 her very much.",
-  title: "Hello Rosa"
-}
-
-   <PlayItem storyObject={storyObject} setStory={pickStory}/>
-           
-           <PlayItem storyObject={storyObject2} setStory={pickStory}/>
-
-*/
 
 export default Play;

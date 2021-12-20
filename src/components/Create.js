@@ -149,7 +149,7 @@ function Create(props){
             <p>ex: Harold was a (adjective) (animal). He loves to (verb).</p>
             <input type='text' id='storytitle' placeholder={'Write Title Here'}></input> <br/>
 
-            <textarea id='madlibtextarea' cols='50' rows="10" placeholder="Write story here"></textarea>
+            <textarea id='madlibtextarea' className="textareabox" rows="10" placeholder="Write story here"></textarea>
             <br/>
             <button type="button" onClick={submitTemplate} className="btn btn-primary">Submit</button>
        

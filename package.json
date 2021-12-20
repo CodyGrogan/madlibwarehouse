@@ -21,11 +21,12 @@
     "jade": "~1.11.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node ./bin/www",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "node ./bin/www"
+    "server": "node ./bin/www",
+    "reactstart": "react-scripts start"
   },
   "eslintConfig": {
     "extends": [

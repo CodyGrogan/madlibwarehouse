@@ -90,10 +90,13 @@
   padding-right: 10px;
 }
 
+
+
 @media screen and (max-width: 550px) {
   
   .imgCap{
     font-size: 8pt;
+    
   }
 
     
@@ -104,9 +107,24 @@
 
   .signBtn{
     font-size: 10pt;
+    position: relative;
+    
+
   }
 
 }
 
+@media screen and (min-width: 1000px) {
+
+        .signBtn{
+          position: absolute;
+            right: 0px;
+            top: 8px;
+        }
+
+
+
+  
+}
 
 

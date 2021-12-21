@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var mongopassword = process.env.MONGOPASS;
 //need madlib model
 var defmadlibModel = require('../models/madlibModel');
-
+var path = require('path')
 var mongodb = 'mongodb+srv://cg123:'+ mongopassword +'@sandbox.o8c7z.mongodb.net/Madlib?retryWrites=true&w=majority';
 mongoose.connect(mongodb, {useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -107,8 +107,14 @@ router.delete('/profile/delete/:id', function(req, res, next){
 })
 
 //this must be last
-router.get('*', function(req, res, next) {
-    res.redirect('/');
+
+
+router.get('*', function(req, res) {
+
+    console.log("received *");
+    
+    let pathstring = (path.join(__dirname, '../build/index.html' ));
+    console.log(pathstring);
   });
 
 

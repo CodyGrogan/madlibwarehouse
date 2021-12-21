@@ -87,7 +87,7 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
            
 
             <button type="button" onClick={signIn} className='navbar-brand btn btn-outline-primary signBtn'  id="sign-in" onclick="signIn()" >
-                    <i className="material-icons">account_circle</i>Sign-in with Google
+                    <i className="material-icons">account_circle</i>Sign-in
             </button>
             <button hidden type="button" onclick={signOut} className="navbar-brand btn btn-warning signBtn" id='sign-out'>Sign Out</button>
                

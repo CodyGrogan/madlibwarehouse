@@ -21,16 +21,16 @@ function Home(props){
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                <img class="d-block w-100"  src={playimg} alt="First slide"/>
+                <img class="d-block w-100 carouselImg"  src={playimg} alt="First slide"/>
                 </div>
                 <div class="carousel-item">
-                <img class="d-block w-100" src={createimg} alt="Second slide"/>
+                <img class="d-block w-100 carouselImg" src={createimg} alt="Second slide"/>
                 </div>
                 <div class="carousel-item">
-                <img class="d-block w-100" src={shareimg} alt="Third slide"/>
+                <img class="d-block w-100 carouselImg" src={shareimg} alt="Third slide"/>
                 </div>
                 <div class="carousel-item">
-                <img class="d-block w-100" src={profileimg} alt="Fourth slide"/>
+                <img class="d-block w-100 carouselImg" src={profileimg} alt="Fourth slide"/>
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

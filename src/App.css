@@ -64,3 +64,8 @@
   flex-direction: column;
   align-items: center;
 }
+
+.carouselImg{
+  max-height: 523px;
+  max-width: 958ps
+}

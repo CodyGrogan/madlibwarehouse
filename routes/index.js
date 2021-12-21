@@ -115,6 +115,7 @@ router.get('*', function(req, res) {
     
     let pathstring = (path.join(__dirname, '../build/index.html' ));
     console.log(pathstring);
+    res.sendFile(pathstring);
   });
 
 

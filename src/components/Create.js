@@ -142,17 +142,25 @@ function Create(props){
     return(
         <div>
             <Navbar/>
-            
+            <div className="pageCon">
             <p>In this section, write your own mad lib template</p>
 
             <p>When you write your story, request words by putting them in parenthesis.</p>
             <p>ex: Harold was a (adjective) (animal). He loves to (verb).</p>
-            <input type='text' id='storytitle' placeholder={'Write Title Here'}></input> <br/>
 
-            <textarea id='madlibtextarea' className="textareabox" rows="10" placeholder="Write story here"></textarea>
-            <br/>
-            <button type="button" onClick={submitTemplate} className="btn btn-primary">Submit</button>
-       
+
+            <div className="card game">
+
+                <div className="card-header">
+                    <input type='text' id='storytitle' placeholder={'Write Title Here'}></input>
+                </div>
+
+                <div className="card-body">
+
+                    <textarea id='madlibtextarea' className="textareabox" rows="10" placeholder="Write story here"></textarea>
+                    <br/><br/>
+                    <button type="button" onClick={submitTemplate} className="btn btn-primary">Submit</button>
+                </div>
         
 
                     <button hidden id='openModal' type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
@@ -179,6 +187,8 @@ function Create(props){
                     </div>
                     </div>
 
+            </div>
+            </div>
 
        
         </div>

@@ -12,7 +12,7 @@ function Home(props){
 
         <div>
             <Navbar/>
-        <div className='homeCon'>
+        <div className='pageCon'>
             <h2>Welcome to Madlib Warehouse</h2>
       <p>Play, Create, and Share Madlibs</p>
 

@@ -65,9 +65,9 @@ function Game(props){
     }
 
     return(
-        <div>
+        <div className='game'>
             
-            <div id='storyDiv' class='card'>
+            <div id='storyDiv' className='card'>
                 <div class='card-header'>
                     <h2 id='storyTitle'>{title}</h2>
                 </div>

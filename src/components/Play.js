@@ -133,6 +133,7 @@ function getStories(){
     return(
         <div>
             <Navbar/>
+            <div>
 
             <p>Pick a story and play!</p>
 
@@ -148,9 +149,11 @@ function getStories(){
            {storyArray}
             </table>
             </div>
-        <div hidden id='gameFrame'>
+        <div hidden id='gameFrame' className="pageCon">
             <Game key={keyValue} storyObject={pickedStory} resetGame={resetGame}/>
         </div>
+        </div>
+
         </div>
     )
 }

@@ -58,7 +58,7 @@
   
 }
 
-.homeCon{
+.pageCon{
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -68,4 +68,8 @@
 .carouselImg{
   max-height: 523px;
   max-width: 958ps
+}
+
+.game{
+  min-width: 95%;
 }

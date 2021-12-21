@@ -90,12 +90,21 @@
   padding-right: 10px;
 }
 
+.imgCap{
+  
+  transition: transform .2s; 
+  
+}
 
+.imgCap:hover{
+  transform: scale(1.2);
+}
 
 @media screen and (max-width: 550px) {
   
   .imgCap{
     font-size: 8pt;
+    
     
   }
 

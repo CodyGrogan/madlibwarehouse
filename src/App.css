@@ -73,3 +73,15 @@
 .game{
   min-width: 95%;
 }
+.imgCap{
+  color: #282c34;
+  background-color: #39C0ED;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 10px 10px 8px black;
+}
+
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+    filter: invert(100%);
+}

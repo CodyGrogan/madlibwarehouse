@@ -4,6 +4,7 @@ import playimg from './img/play.PNG';
 import createimg from './img/create.png';
 import profileimg from './img/profile.PNG';
 import shareimg from './img/share.PNG'
+import { Link } from "react-router-dom";
 
 
 function Home(props){
@@ -22,15 +23,30 @@ function Home(props){
             <div class="carousel-inner">
                 <div class="carousel-item active">
                 <img class="d-block w-100 carouselImg"  src={playimg} alt="First slide"/>
+                <div class="carousel-caption d-none d-md-block">
+                <Link className="navbar-brand nav-link" to='/play'><h2 className='imgCap'>Play Madlibs</h2></Link>    
+                     
+                </div>
                 </div>
                 <div class="carousel-item">
                 <img class="d-block w-100 carouselImg" src={createimg} alt="Second slide"/>
+                <div class="carousel-caption d-none d-md-block">
+                <Link className="navbar-brand nav-link" to='/create'><h2 className='imgCap'>Create your own Madlibs</h2></Link>
+                     
+                </div>
+
                 </div>
                 <div class="carousel-item">
                 <img class="d-block w-100 carouselImg" src={shareimg} alt="Third slide"/>
+                <div class="carousel-caption d-none d-md-block">
+                    <Link className="navbar-brand nav-link" to='/play'> <h2 className='imgCap'>Share your Creation with the World</h2></Link>  
+                </div>
                 </div>
                 <div class="carousel-item">
                 <img class="d-block w-100 carouselImg" src={profileimg} alt="Fourth slide"/>
+                <div class="carousel-caption d-none d-md-block">
+                    <Link className="navbar-brand nav-link" to='/profile'> <h2 className='imgCap'>Track the popularity of your Madlibs</h2></Link>  
+                </div>
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

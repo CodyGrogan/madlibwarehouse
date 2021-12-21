@@ -79,10 +79,6 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
         <div>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-            </button>
-            <h1>MadlibWarehouse</h1>
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
             
 
@@ -94,12 +90,19 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
                     
                     <Link className="navbar-brand nav-link" to='/profile' id='profileLink'>Profile</Link>   
                     
-                    <button type="button" onClick={signIn} className='navbar-brand btn btn-outline-primary'  id="sign-in" onclick="signIn()" >
+                
+            </div>
+
+            
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <h2 className="madLogo">MadlibWarehouse</h2>
+            <button type="button" onClick={signIn} className='navbar-brand btn btn-outline-primary signBtn'  id="sign-in" onclick="signIn()" >
                     <i className="material-icons">account_circle</i>Sign-in with Google
                   </button>
-                  <button hidden type="button" onclick={signOut} className="navbar-brand btn btn-warning" id='sign-out'>Sign Out</button>
+                  <button hidden type="button" onclick={signOut} className="navbar-brand btn btn-warning signBtn" id='sign-out'>Sign Out</button>
                   
-            </div>
             </nav>
         </div>
     )

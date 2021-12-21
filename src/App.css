@@ -86,9 +86,27 @@
     filter: invert(100%);
 }
 
-@media screen and (max-width: 600px) {
+.madLogo{
+  padding-right: 10px;
+}
+
+@media screen and (max-width: 550px) {
   
   .imgCap{
     font-size: 8pt;
   }
+
+    
+  .madLogo{
+    font-size: 10pt;
+    padding-right: 2px;
+  }
+
+  .signBtn{
+    font-size: 10pt;
+  }
+
 }
+
+
+

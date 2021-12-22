@@ -6,7 +6,9 @@ import {
     signInWithPopup,
     signOut,
     EmailAuthProvider,
-    fetchSignInMethodsForEmail,
+    createUserWithEmailAndPassword,
+    updateProfile,
+    signInWithEmailAndPassword
   } from 'firebase/auth';
 
   
@@ -15,49 +17,76 @@ import {
 
 function Navbar(props){
 
-  var email;
     
   async function signIn() {
-    console.log("sign in button pressed")
-  
-    var provider = new GoogleAuthProvider();
-    provider.setCustomParameters({
-        prompt: 'select_account'
-      });
-    await signInWithPopup(getAuth(), provider);
-  
-  }
+        console.log("sign in button pressed")
+      
+        var provider = new GoogleAuthProvider();
+        provider.setCustomParameters({
+            prompt: 'select_account'
+          });
+        await signInWithPopup(getAuth(), provider);
+      
+      }
 
-  async function signInEmail() {
-    console.log("sign in email button pressed")
-  
-    var provider = new EmailAuthProvider();
-    provider.setCustomParameters({
-        prompt: 'select_account'
-      });
-    await signInWithPopup(getAuth(), provider);
-  
-  }
 
-  async function checkEmail(){
+    async function signInEmail() {
+        console.log("sign in email button pressed")
+        let email = document.getElementById('signInEmail').value;
+        let password = document.getElementById('signInPassword').value;
+        
+    signInWithEmailAndPassword(getAuth(), email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode + errorMessage);
+        console.log(email);
+        alert("Wrong Email or Password")
+      });
+      
+    }
+
+  
+
+  
+  async function emailSignUp(){
     //this function needs to use firebase to determine if the user has already signed up with this email.
     //if yes, send on to signInPasswordModal, if no, send on to signUpFormModal
 
-    email = document.getElementById('signUpEmail').value;
+    let email = document.getElementById('signUpEmail').value;
+    let name = document.getElementById('signUpName').value;
+    let password = document.getElementById('signUpPassword').value;
     
-    let check = fetchSignInMethodsForEmail(email);
-    console.log(check);
-    if (check == []){
+    createUserWithEmailAndPassword(getAuth(), email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
 
-      console.log('account doesnt exist')
-      //go to sign up form
-    }
-    else
-    {
-      
-      console.log('account exists')
-      //go to password modal
-    }
+        updateProfile(getAuth().currentUser, {
+          displayName: name
+        }).then(() => {
+          // Profile updated!
+          // ...
+          console.log('displayname set')
+        }).catch((error) => {
+          // An error occurred
+          // ...
+        });
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+
+        alert("Invalid Email or Already Exists")
+      });
+    
   }
 
 
@@ -125,7 +154,7 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
             <button type="button" data-toggle="modal" data-target="#logInModal" className='navbar-brand btn btn-outline-primary signBtn'  id="sign-in" onclick="signIn()" >
                     <i className="material-icons">account_circle</i>Sign-in
             </button>
-            <button hidden type="button" onClick={signOut} className="navbar-brand btn btn-warning signBtn" id='sign-out'>Sign Out</button>
+            <button hidden type="button" className="navbar-brand btn btn-warning signBtn" id='sign-out'>Sign Out</button>
                
 
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
@@ -160,7 +189,9 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
 
                           <div id='signInButtons'>
                             <button  type="button" className="btn btn-primary" onClick={signIn} data-dismiss="modal">Login with Google</button> <br/> <br/>
-                            <button type="button" className="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#emailSignInModal">Log in with Email</button>
+                            <button type="button" className="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#emailSignInModal">Log in with Email</button><br/> <br/>
+                            <button type="button" className="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#signUpFormModal">Sign Up with Email</button>
+                          
                           </div>
 
                          
@@ -198,20 +229,26 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
 
                           <form id='getEmail'>
                               <div class="form-group">
-                                    <label for="signUpEmail">Email address</label>
-                                    <input type="email" class="form-control" id="signUpEmail" aria-describedby="emailHelp" placeholder="Enter email"/>
+                                    <label for="signInEmail">Email address</label>
+                                    <input type="email" class="form-control" id="signInEmail" aria-describedby="emailHelp" placeholder="Enter email"/>
                                   
-                                    <button class="btn btn-primary" onClick={checkEmail}>Submit</button>
+                                  
                                   </div>
 
+                                  
+                              
+                              <div class="form-group">
+                                    <label for="signInPassword">Password</label>
+                                    <input type="password" class="form-control" id="signInPassword" placeholder="Password"/>
+                                    <button class="btn btn-primary" onClick={signInEmail} data-dismiss="modal">Submit</button>
+                                </div>
+                              
+                            
                             </form>
 
 
 
-                         <button hidden id='goToPassword' data-dismiss="modal" data-toggle="modal" data-target="#PasswordSignInModal"></button>
-                         
-                         <button hidden id='goToSignUp' data-dismiss="modal" data-toggle="modal" data-target="#signUpFormModal"></button>    
-
+                        
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -225,45 +262,7 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
         </div>
 
 
-        <div class="modal fade" id="passwordSignInModal" tabindex="-1" aria-labelledby="passwordSignInModal" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="logInModalLabel">Log In</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-
-                        
-                          
-
-                          <div id='emailPasswordSignIn'>
-                              <form id='emailSignInPass'>
-                              <div class="form-group">
-                                    <label for="signInPassword">Password</label>
-                                    <input type="password" class="form-control" id="signInPassword" placeholder="Password"/>
-                                    <button class="btn btn-primary" data-dismiss="modal">Submit</button>
-                                </div>
-                              
-                              </form>
-
-                            </div>
-
-
-                            
-                        
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-
-
-        </div>
+       
 
 
 
@@ -291,7 +290,14 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
                                     
                                     
                                     </div>
-  
+
+                                    <div class="form-group">
+                                      <label for="signUpEmail">Email address</label>
+                                      <input type="email" class="form-control" id="signUpEmail" aria-describedby="emailHelp" placeholder="Enter email"/>
+                                    
+                                  </div>
+
+
                                     
                                     
                                     <div class="form-group">
@@ -301,7 +307,7 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
                                     
   
   
-                                    <button class="btn btn-primary" data-dismiss="modal">Submit</button>
+                                    <button class="btn btn-primary" onClick={emailSignUp} data-dismiss="modal">Submit</button>
                                   </form>
 
 

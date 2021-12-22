@@ -188,7 +188,7 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
                         <div class="modal-body">
 
                           <div id='signInButtons'>
-                            <button  type="button" className="btn btn-primary" onClick={signIn} data-dismiss="modal">Login with Google</button> <br/> <br/>
+                            <button  type="button" className="btn btn-primary" onClick={signIn} data-dismiss="modal">Log in with Google</button> <br/> <br/>
                             <button type="button" className="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#emailSignInModal">Log in with Email</button><br/> <br/>
                             <button type="button" className="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#signUpFormModal">Sign Up with Email</button>
                           

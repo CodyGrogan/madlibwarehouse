@@ -4,6 +4,7 @@ import Home from './components/Home';
 import Create from './components/Create';
 import Navbar from './components/Navbar';
 import Play from './components/Play';
+import Notfound from './components/Notfound';
 import {
   BrowserRouter,
   Routes,
@@ -109,6 +110,7 @@ function App() {
             <Route path='/create' element={<Create/>}/>
             <Route path='/play' element={<Play/>}/>
             <Route path='/profile' element={<Profile/>}/>
+            <Route path='*' element={<Notfound/>}/>
         </Routes>
       </BrowserRouter>
     </div>

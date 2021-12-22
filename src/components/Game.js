@@ -48,10 +48,18 @@ function Game(props){
         if(currentWord>wordList.length -1){
             let wordInputDiv = document.getElementById('wordInputDiv');
             wordInputDiv.hidden = true;
-            let newstory = createStory();
-            document.getElementById('storyP').innerText= newstory;
-            document.getElementById('storyTitle').innerText = title;
+            let loader = document.getElementById('loadCircle');
+            loader.hidden = false;
+            setTimeout(()=>{
+                loader.hidden = true;
+                let bar = document.getElementById('inputProgressBar');
+                bar.hidden = true;
+                let newstory = createStory();
+                document.getElementById('storyP').innerText= newstory;
+                document.getElementById('storyTitle').innerText = title;
+            }, 1000);
         }
+         
     },[currentWord]);
 
    
@@ -73,18 +81,29 @@ function Game(props){
                 </div>
                 <div class='card-body'>
 
+            <div id='inputCon'>
                 <div id='wordInputDiv'>
                 <p>Please enter a {wordList[currentWord]}</p><br/>
                 <input type={'text'} onKeyDown={enterKeyPressed} id='getWord' autofocus></input><br/><br/>
                 <button id='textBtn' onClick={submitWord} type="button" className="btn btn-primary">Submit</button><br/>
-                <div class="progress">
-                      <div class="progress-bar" role="progressbar" style={{width: progressWidth}} aria-valuenow={progress} aria-valuemin="0" aria-valuemax="100"> {submittedWords.length} / {storyLength}</div>
+                 </div>
+               
+                <div className='loaderCon'>
+                    <div id='loadCircle' hidden className='loader'></div>
                 </div>
-              
+                
+                <div id='inputProgressBar' class="progress">
+                    <div class="progress-bar" role="progressbar" style={{width: progressWidth}} aria-valuenow={progress} aria-valuemin="0" aria-valuemax="100"> {submittedWords.length} / {storyLength}</div>
                 </div>
+                
+                </div>
+
+                
 
 
                     <p id='storyP'></p>
+
+                    
                     <button onClick={props.resetGame} type='button' className='btn btn-warning btn-sm'>Reset</button>
                 </div>
             </div>

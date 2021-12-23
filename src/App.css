@@ -7,6 +7,7 @@
   pointer-events: none;
 }
 
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -161,4 +162,28 @@
   100% { transform: rotate(360deg); }
 }
 
+.aboutCon{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 
+.aboutIcon{
+  padding: 10px;
+  max-height: 50px;
+  max-width: 100px;
+}
+
+.homeSection{
+
+    display: flex;
+   
+    flex-direction: column;
+    align-items: center;
+ 
+  width: 100%;
+  min-height: 100vh;
+}

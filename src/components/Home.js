@@ -5,6 +5,13 @@ import createimg from './img/create.png';
 import profileimg from './img/profile.PNG';
 import shareimg from './img/share.PNG'
 import { Link } from "react-router-dom";
+import html5icon from './img/html5.png';
+import cssicon from './img/css.png';
+import jsicon from './img/javascript.png';
+import nodeicon from './img/node.png';
+import reacticon from './img/logo192.png';
+import mongoicon from './img/mongo.png';
+import expressicon from './img/Expressjs.png';
 
 
 function Home(props){
@@ -63,7 +70,26 @@ function Home(props){
     </div>
 
     </div>
-        </div>
+
+
+    <div>
+    <h5>This project was made with:</h5>
+    <div id='about' className='aboutCon'>
+        
+        <img className='aboutIcon' src={html5icon} data-toggle="tooltip" data-placement="top" title="HTML5" />
+        <img className='aboutIcon' src={cssicon} data-toggle="tooltip" data-placement="top" title="CSS" />
+        <img className='aboutIcon' src={jsicon} data-toggle="tooltip" data-placement="top" title="JavaScript"/>
+        <img className='aboutIcon' src={reacticon} data-toggle="tooltip" data-placement="top" title="React.js"/>
+        <img className='aboutIcon' src={mongoicon} data-toggle="tooltip" data-placement="top" title="MongoDB"/>
+        <img className='aboutIcon' src={nodeicon} data-toggle="tooltip" data-placement="top" title="Node.js"/>
+        <img className='aboutIcon' src={expressicon} data-toggle="tooltip" data-placement="top" title="express.js"/>
+
+    </div>
+
+    </div>
+
+    </div>
+        
 
     )
 

@@ -93,6 +93,8 @@ function Profile(props){
                 setTotalMadlibs(length);
                 setTotalPlays(totalplays);
                 setUserStories(newArray);
+                let loader = document.getElementById('profileLoader');
+                loader.hidden = true;
     
                 
             })
@@ -115,6 +117,8 @@ function Profile(props){
 
             //this only sometimes works immediately, fix this
             setUserStories([]);
+            let loader = document.getElementById('profileLoader');
+            loader.hidden = false;
             setListLoaded(false);
             
         })
@@ -142,6 +146,8 @@ function Profile(props){
             setListLoaded(true);
             getUserStories();
             
+
+            
             }
         }
         else
@@ -167,17 +173,26 @@ function Profile(props){
 
 
                     </div>
+                    
 
                     <table className="table col-md">
+                    
                                 <tr>
                                 <th>Title</th>
                                 <th>Plays</th>
                                 <th>Delete</th>
                                 
                             </tr>
+                            <tr hidden id='profileLoader'>
+                                <td></td>
+                                <td><div className="loaderCon"><div className='loader'/></div> </td>
+                                <td></td>
+                            </tr>
                             {userStories}
 
                     </table>
+
+                    
                 </div>        
 
             </div>

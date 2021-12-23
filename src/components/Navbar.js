@@ -61,6 +61,12 @@ function Navbar(props){
     let email = document.getElementById('signUpEmail').value;
     let name = document.getElementById('signUpName').value;
     let password = document.getElementById('signUpPassword').value;
+
+    if (name.length < 1){
+      alert("Name must have at least one character")
+    }
+
+    else{
     
     createUserWithEmailAndPassword(getAuth(), email, password)
       .then((userCredential) => {
@@ -86,7 +92,7 @@ function Navbar(props){
 
         alert("Invalid Email or Already Exists")
       });
-    
+    }
   }
 
 
@@ -118,9 +124,10 @@ var signOutButtonElement = document.getElementById('sign-out');
       var userName = getUserName();
       signInButtonElement.hidden = true;
       signOutButtonElement.hidden = false;
+      if (userName != "null" && userName != null){
       let profileLink = document.getElementById('profileLink');
       profileLink.innerText =  `${userName}'s Profile`
-      
+      }
   
     }
 

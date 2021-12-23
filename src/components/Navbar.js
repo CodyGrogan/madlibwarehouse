@@ -159,7 +159,7 @@ onAuthStateChanged(getAuth(), navauthStateObserver);
            
 
             <button type="button" data-toggle="modal" data-target="#logInModal" className='navbar-brand btn btn-outline-primary signBtn'  id="sign-in" onclick="signIn()" >
-                    <i className="material-icons">account_circle</i>Sign-in
+                    <i className="material-icons">account_circle</i>Sign In
             </button>
             <button hidden type="button" className="navbar-brand btn btn-warning signBtn" id='sign-out'>Sign Out</button>
                

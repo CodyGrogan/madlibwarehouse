@@ -52,10 +52,12 @@
 
 .carouselCon{
   
-  max-width: 80%;
+  
+  max-width: 70%;
   padding: 10px;
   background-color: #39C0ED;
   border-radius: 10px;
+  
   
 }
 
@@ -68,7 +70,7 @@
 
 .carouselImg{
   max-height: 523px;
-  max-width: 958ps
+  max-width: 800px;
 }
 
 .game{
@@ -80,6 +82,7 @@
   padding: 10px;
   border-radius: 10px;
   box-shadow: 10px 10px 8px black;
+  transition: transform .2s; 
 }
 
 .carousel-control-next,
@@ -91,11 +94,7 @@
   padding-right: 10px;
 }
 
-.imgCap{
-  
-  transition: transform .2s; 
-  
-}
+
 
 .imgCap:hover{
   transform: scale(1.2);
@@ -105,6 +104,7 @@
   
   .imgCap{
     font-size: 8pt;
+    
     
     
   }
@@ -127,6 +127,8 @@
   }
 
 }
+
+@media screen and (max-wdith: 600px){}
 
 @media screen and (min-width: 993px) {
 

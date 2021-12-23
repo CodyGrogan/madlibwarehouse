@@ -47,13 +47,13 @@ function Home(props){
                 <div class="carousel-item">
                 <img class="d-block w-100 carouselImg" src={shareimg} alt="Third slide"/>
                 <div class="carousel-caption">
-                    <Link className="navbar-brand nav-link" to='/play'> <h2 className='imgCap'>Share your Creation with the World</h2></Link>  
+                    <Link className="navbar-brand nav-link" to='/play'> <h2 className='imgCap'>Share your Creation</h2></Link>  
                 </div>
                 </div>
                 <div class="carousel-item">
                 <img class="d-block w-100 carouselImg" src={profileimg} alt="Fourth slide"/>
                 <div class="carousel-caption">
-                    <Link className="navbar-brand nav-link" to='/profile'> <h2 className='imgCap'>Track the popularity of your Madlibs</h2></Link>  
+                    <Link className="navbar-brand nav-link" to='/profile'> <h2 className='imgCap'>Track their Popularity</h2></Link>  
                 </div>
                 </div>
             </div>
@@ -69,11 +69,8 @@ function Home(props){
 
     </div>
 
-    </div>
-
-
     <div>
-    <h5>This project was made with:</h5>
+    <p>This project was made with:</p>
     <div id='about' className='aboutCon'>
         
         <img className='aboutIcon' src={html5icon} data-toggle="tooltip" data-placement="top" title="HTML5" />
@@ -87,7 +84,7 @@ function Home(props){
     </div>
 
     </div>
-
+    </div>
     </div>
         
 

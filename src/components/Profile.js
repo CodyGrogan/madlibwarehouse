@@ -157,7 +157,7 @@ function Profile(props){
             <Navbar/>
             <div className="container">
                 <div className="row">
-                    <div className="card col-">
+                    <div className="card col- profCard">
                     
                     <h2 className='card-header' id='userNameTitle'>{userName}</h2>
                             <div class="card-body">

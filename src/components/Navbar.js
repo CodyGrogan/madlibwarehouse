@@ -90,7 +90,7 @@ function Navbar(props){
         const errorMessage = error.message;
         // ..
 
-        alert("Invalid Email or Already Exists")
+        alert("Invalid Email, Password Less than 6 characters, or Already Exists")
       });
     }
   }

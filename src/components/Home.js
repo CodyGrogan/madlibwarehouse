@@ -12,6 +12,7 @@ import nodeicon from './img/node.png';
 import reacticon from './img/logo192.png';
 import mongoicon from './img/mongo.png';
 import expressicon from './img/Expressjs.png';
+import Footer from './Footer';
 
 
 function Home(props){
@@ -85,6 +86,8 @@ function Home(props){
 
     </div>
     </div>
+
+    <Footer/>
     </div>
         
 

@@ -6,8 +6,10 @@ var mongoose = require('mongoose');
 var mongopassword = process.env.MONGOPASS;
 //need madlib model
 var defmadlibModel = require('../models/madlibModel');
-var path = require('path')
-var mongodb = 'mongodb+srv://cg123:'+ mongopassword +'@sandbox.o8c7z.mongodb.net/Madlib?retryWrites=true&w=majority';
+var path = require('path');
+let database = process.env.USEDB;
+//in production USEDB = "Madlib"
+var mongodb = 'mongodb+srv://cg123:'+ mongopassword +'@sandbox.o8c7z.mongodb.net/'+ database +'?retryWrites=true&w=majority';
 mongoose.connect(mongodb, {useNewUrlParser: true, useUnifiedTopology: true});
 
 var db = mongoose.connection;

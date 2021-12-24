@@ -21,8 +21,22 @@ import { Mongoose } from "mongoose";
 function Play(props){
     const [keyValue, setKeyValue] = useState(0);  //this is necessary to make the Game component reset when the reset button is clicked.
     const [storyArray, setStoryArray] = useState([]);
-    let initialLoad = false;
     
+    const [storyObjArray, setStoryObjectArray] = useState([]);
+    let initialLoad = false;
+    var storypicked = false;
+    let storyObjectNull=
+    {
+        wordList: [
+         'null'
+        ],
+        story: "null",
+        title: "null"
+      }  
+    const [pickedStory, setPickedStory] = useState(storyObjectNull);
+    let frame = document.getElementById('gameFrame');
+    let tablediv = document.getElementById('tableDiv');
+
 
 function getStories(){
     console.log('get stories fired')
@@ -33,6 +47,7 @@ function getStories(){
         let pathstring = '/play/storylist'
         fetch(pathstring).then(response => response.json()).then(function (data){
             console.log(data);
+            setStoryObjectArray(data);
             let length = data.length;
             let newArray = [];
             for (let i = 0; i<length;i++){
@@ -46,31 +61,113 @@ function getStories(){
             
         })
     }
-    }
+}
 
-    var storypicked = false;
-   
+let sortByPlays = (array) =>{
+    console.log('sortByPlays clicked')
+    let storyObjects = array.slice(0);
+    storyObjects.sort(function(a,b){
+        return b.plays - a.plays;
+    });
+    console.log(storyObjects)
+    return storyObjects
 
 
-      let storyObjectNull=
-      {
-          wordList: [
-           'null'
-          ],
-          story: "null",
-          title: "null"
+}
+
+let sortByAlphabet = (storyarray, type) =>{
+    let array = storyarray.slice(0);
+    if (type == 'name'){
+    array.sort(function(a, b) {
+        var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+        var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+        if (nameA < nameB) {
+          return -1;
         }
-  
-        
-
+        if (nameA > nameB) {
+          return 1;
+        }
       
-    let frame = document.getElementById('gameFrame');
-    let tablediv = document.getElementById('tableDiv');
+        // names must be equal
+        return 0;
+      });
+    }
+    else{
 
-    const [pickedStory, setPickedStory] = useState(storyObjectNull);
+    
+        array.sort(function(a, b) {
+            var nameA = a.title.toUpperCase(); // ignore upper and lowercase
+            var nameB = b.title.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+          
+            // names must be equal
+            return 0;
+          });
+
+    }
+    return array;
+      
+}
+
+let sortByPlaysBtn = ()=>{
+    let array = storyObjArray.slice(0);
+    let sortedArray = sortByPlays(array);
+    let length = sortedArray.length;
+    let newArray = [];
+    for (let i = 0; i<length;i++){
+
+        let newjsx = <PlayItem storyObject = {sortedArray[i]} setStory={pickStory}/>
+        newArray.push(newjsx);
+        
+    }
+    setStoryArray(newArray);
 
 
-      let pickStory = (story) =>{
+}
+
+let sortByNameBtn = ()=>{
+    let array = storyObjArray.slice(0);
+    let sortedArray = sortByAlphabet(array, 'name');
+    let length = sortedArray.length;
+    let newArray = [];
+    for (let i = 0; i<length;i++){
+
+        let newjsx = <PlayItem storyObject = {sortedArray[i]} setStory={pickStory}/>
+        newArray.push(newjsx);
+        
+    }
+    setStoryArray(newArray);
+
+
+}
+let sortByTitleBtn = ()=>{
+    let array = storyObjArray.slice(0);
+    let sortedArray = sortByAlphabet(array, 'title');
+    let length = sortedArray.length;
+    let newArray = [];
+    for (let i = 0; i<length;i++){
+
+        let newjsx = <PlayItem storyObject = {sortedArray[i]} setStory={pickStory}/>
+        newArray.push(newjsx);
+        
+    }
+    setStoryArray(newArray);
+
+
+}
+
+
+
+
+ 
+
+
+let pickStory = (story) =>{
 
         console.log('pick story clicked')
 
@@ -140,9 +237,9 @@ function getStories(){
             <div id='tableDiv'>
             <table className="table">
                 <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Plays</th>
+                    <th><button className="btn btn-outline-info" onClick={sortByTitleBtn}>Title</button></th>
+                    <th><button className="btn btn-outline-info" onClick={sortByNameBtn}>Author</button></th>
+                    <th><button className="btn btn-outline-info" onClick={sortByPlaysBtn}>Plays</button></th>
                     <th></th>
                 </tr>
         

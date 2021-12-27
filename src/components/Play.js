@@ -76,6 +76,8 @@ let sortByPlays = (array) =>{
 }
 
 let sortByAlphabet = (storyarray, type) =>{
+    //type parameter should be a string 'name' or 'title'
+
     let array = storyarray.slice(0);
     if (type == 'name'){
     array.sort(function(a, b) {

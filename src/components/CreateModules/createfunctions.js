@@ -61,9 +61,6 @@
     // get the indecies of each ( and )
 
 
-        console.log(parenthesesArray1);
-        console.log(input);
-
         let madlib = {
             wordList: wordArray,
             story: input,

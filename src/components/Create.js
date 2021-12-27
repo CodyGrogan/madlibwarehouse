@@ -12,28 +12,21 @@ import {
   
   }
 
-function submitTemplate(){
-
-
-    if (isUserSignedIn() == true){
-    let input = document.getElementById('madlibtextarea').value;
-    let title = document.getElementById('storytitle').value;
-    console.log(input);
-
+  function parseStory(input, title, uid, name){
+      
     let parenthesesArray1 = [];
     let parenthesesArray2 = []
     let wordArray = [];
-    let slicedString = '';
+    
 
     for (let i = 0; i < input.length; i++){
-
+        //Check for #, since it is used in the Play component to identity where to insert words
         let letter = input.charAt(i);
         if (letter == '#'){
-            alert('invlaid character #')
-            break;
+            return 'error1';
         }
 
-        
+        //saves the index of parenthesis brackets
        else if (letter == '('){
             parenthesesArray1.push(i);
         }
@@ -45,8 +38,8 @@ function submitTemplate(){
     }
 
     if (parenthesesArray1.length != parenthesesArray2.length || parenthesesArray2.length == 0 || title.length < 1){
-
-        alert('Your story needs a title must have at least one word request in ( ). ')
+        //returns an error if there are unequal number of left and right parentheses or no parentheses
+        return 'error2';
 
         
     }
@@ -88,20 +81,50 @@ function submitTemplate(){
             wordList: wordArray,
             story: input,
             title: title,
-            uid: getAuth().currentUser.uid,
-            name: getAuth().currentUser.displayName,
+            uid: uid,
+            name: name,
             plays: 0
 
         }
 
 
+        return madlib;
+
+     }
+
+  }
+
+function submitTemplate(){
+
+
+    if (isUserSignedIn() == true){
+    let input = document.getElementById('madlibtextarea').value;
+    let title = document.getElementById('storytitle').value;
+    console.log(input);
+    
+    let uid = getAuth().currentUser.uid;
+    let name = getAuth().currentUser.displayName;
+
+    let madlib = parseStory(input, title, uid, name);
+
+    //check if madlib returned an error
+    if (madlib == 'error1'){
+        alert('Story cannot contain # character')
+    }
+    else if (madlib == 'error2'){
+        alert('Story must have a title and one set of ()')
+    }
+    else{
+
+    
+        //This code resets the DOM
         document.getElementById('madlibtextarea').value = '';
         document.getElementById('storytitle').value = '';
         console.log(madlib);
         submitData(madlib);
         openModal();
-
-     }
+    }
+     
 
     }
     else{
@@ -139,6 +162,8 @@ function openModal(){
 
 
 function Create(props){
+
+
     return(
         <div>
             <Navbar/>
@@ -195,4 +220,5 @@ function Create(props){
     )
 }
 
+export const parseStoryFunction = parseStory;
 export default Create;

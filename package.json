@@ -28,7 +28,7 @@
     "eject": "react-scripts eject",
     "server": "node ./bin/www",
     "reactstart": "react-scripts start",
-    "jesttest": "jest --verbose ./tests"
+    "unittest": "jest --verbose ./tests"
   },
   "eslintConfig": {
     "extends": [

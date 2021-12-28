@@ -2,7 +2,7 @@ import Navbar from "./Navbar";
 import Game from "./Game";
 import PlayItem from "./PlayItem";
 import { useState, useEffect } from "react";
-import { Mongoose } from "mongoose";
+
 const playmodules = require('./PlayModules/PlayModules');
 const sortByPlays = playmodules.sortByPlays;
 const sortByAlphabet = playmodules.sortByAlphabet;

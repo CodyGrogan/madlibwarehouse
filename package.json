@@ -2,6 +2,7 @@
   "name": "madlib-warehouse",
   "version": "0.1.0",
   "private": true,
+
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^11.2.7",
@@ -27,7 +28,7 @@
     "eject": "react-scripts eject",
     "server": "node ./bin/www",
     "reactstart": "react-scripts start",
-    "jesttest": "jest"
+    "jesttest": "jest --verbose ./tests"
   },
   "eslintConfig": {
     "extends": [
@@ -46,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest-watch-typeahead": "^0.6.5"
   }
 }

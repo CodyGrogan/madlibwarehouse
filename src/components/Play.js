@@ -2,10 +2,10 @@ import Navbar from "./Navbar";
 import Game from "./Game";
 import PlayItem from "./PlayItem";
 import { useState, useEffect } from "react";
-
+import { reverseSort, sortByPlays, sortByAlphabet } from "./PlayModules/PlayModules";
 const playmodules = require('./PlayModules/PlayModules');
-const sortByPlays = playmodules.sortByPlays;
-const sortByAlphabet = playmodules.sortByAlphabet;
+
+
 
 // HOW THIS WILL WORK
 //Play page will display a list of PlayItem components
@@ -23,6 +23,9 @@ const sortByAlphabet = playmodules.sortByAlphabet;
 function Play(props){
     const [keyValue, setKeyValue] = useState(0);  //this is necessary to make the Game component reset when the reset button is clicked.
     const [storyArray, setStoryArray] = useState([]);
+    const [titleSorted, setTitleSorted] = useState(false);
+    const [nameSorted, setNameSorted] = useState(false);
+    const [playSorted, setPlaysorted] = useState(false);
     
     const [storyObjArray, setStoryObjectArray] = useState([]);
     let initialLoad = false;
@@ -71,6 +74,16 @@ let sortByPlaysBtn = ()=>{
     let array = storyObjArray.slice(0);
     let sortedArray = sortByPlays(array);
     let length = sortedArray.length;
+    //check if button already pressed, if yes, sortby reverse
+    if (playSorted == true){
+        console.log('already sorted, reversing');
+        
+        sortedArray = reverseSort(sortedArray);
+        setPlaysorted(false);
+    }
+    else{
+        setPlaysorted(true);
+    }
     let newArray = [];
     for (let i = 0; i<length;i++){
 
@@ -79,6 +92,7 @@ let sortByPlaysBtn = ()=>{
         
     }
     setStoryArray(newArray);
+    
 
 
 }
@@ -88,6 +102,15 @@ let sortByNameBtn = ()=>{
     let sortedArray = sortByAlphabet(array, 'name');
     let length = sortedArray.length;
     let newArray = [];
+    if (nameSorted == true){
+        console.log('already sorted, reversing');
+        
+        sortedArray = reverseSort(sortedArray);
+        setNameSorted(false);
+    }
+    else{
+        setNameSorted(true);
+    }
     for (let i = 0; i<length;i++){
 
         let newjsx = <PlayItem storyObject = {sortedArray[i]} setStory={pickStory}/>
@@ -103,6 +126,15 @@ let sortByTitleBtn = ()=>{
     let sortedArray = sortByAlphabet(array, 'title');
     let length = sortedArray.length;
     let newArray = [];
+    if (titleSorted == true){
+        console.log('already sorted, reversing');
+        
+        sortedArray = reverseSort(sortedArray);
+        setTitleSorted(false);
+    }
+    else{
+        setTitleSorted(true);
+    }
     for (let i = 0; i<length;i++){
 
         let newjsx = <PlayItem storyObject = {sortedArray[i]} setStory={pickStory}/>

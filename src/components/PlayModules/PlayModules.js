@@ -52,4 +52,13 @@ let sortByAlphabet = (storyarray, type) =>{
       
 }
 
-module.exports = {sortByPlays, sortByAlphabet};
+function reverseSort(sortedArray){
+  let reverseArray = [];
+  for (let i = sortedArray.length-1; i >= 0; i--){
+      reverseArray.push(sortedArray[i]);
+      console.log(reverseArray);
+  }
+  return reverseArray;
+}
+
+module.exports = {sortByPlays, sortByAlphabet, reverseSort};

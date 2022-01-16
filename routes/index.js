@@ -128,13 +128,23 @@ router.get('/profile/getstory/:uid', function(req,res,next){
     });
 
 });
-router.delete('/profile/delete/:id', function(req, res, next){
+router.delete('/profile/delete/:id/:token', function(req, res, next){
     console.log('delete request received');
     let id = req.params.id;
+    let token = req.params.token;
 
-    defmadlibModel.deleteOne({_id: id}).then(function (){ console.log("data deleted")});
-    res.json({message: 'success'});
-    
+    getAuth(app).verifyIdToken(token)
+    .then((decodedToken) => {
+        defmadlibModel.deleteOne({_id: id}).then(function (){ console.log("data deleted")});
+        res.json({message: 'success'});
+        
+    })
+    .catch((error) => {
+        console.log('auth error');
+        console.log(error);
+    });
+
+
   
 })
 

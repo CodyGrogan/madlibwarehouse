@@ -55,10 +55,12 @@ function submitTemplate(){
 }
 
 
-function submitData(data){
-    let jsonstring = JSON.stringify(data);
-    let postpath = '/create/post'           
- 
+async function submitData(data){
+    let token = await getAuth().currentUser.getIdToken(true);
+    let jsonstring = JSON.stringify([data, token]);
+    let postpath = '/create/post'  ;
+    
+      
         
     fetch(postpath, {
         method: 'POST', 

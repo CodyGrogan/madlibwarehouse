@@ -1,3 +1,6 @@
+const { initializeApp } = require('firebase-admin/app');
+const {getAuth} = require('firebase-admin/auth')
+const admin = require('firebase-admin');
 var express = require('express');
 var router = express.Router();
 //setup mongo
@@ -15,18 +18,45 @@ mongoose.connect(mongodb, {useNewUrlParser: true, useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('err', console.error.bind(console, 'mongodb connection error'));
 
+let serviceAccount = JSON.parse(process.env.FIREBASE);
+
+const app = initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+
+});
 
 
 
 router.post('/create/post', function(req, res, next){
     console.log('posting new story obj');
-    let storyObj = req.body;
+    let storyObj = req.body[0];
+    let token = req.body[1];
+    console.log(token);
+
+    getAuth(app).verifyIdToken(token)
+    .then((decodedToken) => {
+        console.log('server side auth success')
+        console.log(storyObj);
+        console.log(storyObj.wordList);
+       
+        console.log(storyObj.wordList[0]);
+    
+        let madlib_instance = new defmadlibModel({title: storyObj.title, story: storyObj.story, wordList: storyObj.wordList, name: storyObj.name, uid: storyObj.uid, plays: storyObj.plays})
+        
+        madlib_instance.save(function(err){if (err) console.log(err);})
+    })
+    .catch((error) => {
+        console.log('auth error');
+        console.log(error);
+    });
+  
+    
     console.log(storyObj);
     console.log(storyObj.wordList);
    
     console.log(storyObj.wordList[0]);
 
-    let madlib_instance = new defmadlibModel({title: req.body.title, story: req.body.story, wordList: storyObj.wordList, name: req.body.name, uid: req.body.uid, plays: req.body.plays})
+    let madlib_instance = new defmadlibModel({title: storyObj.title, story: storyObj.story, wordList: storyObj.wordList, name: storyObj.name, uid: storyObj.uid, plays: storyObj.plays})
     
     madlib_instance.save(function(err){if (err) console.log(err);})
     
@@ -98,13 +128,23 @@ router.get('/profile/getstory/:uid', function(req,res,next){
     });
 
 });
-router.delete('/profile/delete/:id', function(req, res, next){
+router.delete('/profile/delete/:id/:token', function(req, res, next){
     console.log('delete request received');
     let id = req.params.id;
+    let token = req.params.token;
 
-    defmadlibModel.deleteOne({_id: id}).then(function (){ console.log("data deleted")});
-    res.json({message: 'success'});
-    
+    getAuth(app).verifyIdToken(token)
+    .then((decodedToken) => {
+        defmadlibModel.deleteOne({_id: id}).then(function (){ console.log("data deleted")});
+        res.json({message: 'success'});
+        
+    })
+    .catch((error) => {
+        console.log('auth error');
+        console.log(error);
+    });
+
+
   
 })
 

@@ -101,10 +101,11 @@ function Profile(props){
         }
     }
 
-    function deleteStory(storyObject){
+  async function deleteStory(storyObject){
         console.log('delete button pressed')
         let id = storyObject._id;
-        let postpath = '/profile/delete/' + id;
+        let token = await getAuth().currentUser.getIdToken();
+        let postpath = '/profile/delete/' + id + '/'+ token;
         fetch(postpath, {
             method: 'DELETE', 
             headers: {

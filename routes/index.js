@@ -51,15 +51,6 @@ router.post('/create/post', function(req, res, next){
     });
   
     
-    console.log(storyObj);
-    console.log(storyObj.wordList);
-   
-    console.log(storyObj.wordList[0]);
-
-    let madlib_instance = new defmadlibModel({title: storyObj.title, story: storyObj.story, wordList: storyObj.wordList, name: storyObj.name, uid: storyObj.uid, plays: storyObj.plays})
-    
-    madlib_instance.save(function(err){if (err) console.log(err);})
-    
    
     
 });
